@@ -8,6 +8,7 @@ import configureStore from './store';
 
 import Login from "./pages/login";
 import App from "./pages/app";
+import Capturar from "./pages/app/captura";
 
 const { persistor, store } = configureStore();
 
@@ -25,6 +26,7 @@ class Root extends Component {
 							<Switch>
 								<Route exact path="/" component={Login} />
 								<Route path="/app" component={App} />
+								<Route path="/" component={Capturar} />
 							</Switch>
 						</HashRouter>
 					</Router>
