@@ -145,6 +145,9 @@ class App extends Component {
 		super(props)
 
 		this.state = {
+			puntosMunicipio : [],
+			Municipio : 'Ensenada',
+			puntos : [],
 			periodo : 0,
 			periodo_diputados : [],
 			periodo_senadores : [],
@@ -192,28 +195,41 @@ class App extends Component {
 	componentDidMount() {
 		let self=this;
 
-		 request.get('api/configuracion')
-        .then(function(response)
-        {
-            if(response.status === 200)
-            {
-               //self.paginas(response.data.access_token);
-            }
-        });
+		 // request.get('api/configuracion')
+   //      .then(function(response)
+   //      {
+   //          if(response.status === 200)
+   //          {
+   //             //self.paginas(response.data.access_token);
+   //          }
+   //      });
 
-    	request.get('api/periodoDiputados')
+   //  	request.get('api/periodoDiputados')
+   //  	.then(function(response){
+   //  		if(response.status === 200){
+   //  			self.setState({periodo_diputados : response.data});
+   //  		}
+   //  	});
+
+   //  	request.get('api/periodoSenadores')
+   //  	.then(function(response){
+   //  		if(response.status === 200){
+   //  			self.setState({periodo_senadores : response.data});
+    			
+   //  			self.props.promedio_senadores(response.data[0].created_at);
+   //  		}
+   //  	});
+
+   	request.get('api/puntosDistrito/7')
     	.then(function(response){
     		if(response.status === 200){
-    			self.setState({periodo_diputados : response.data});
+    			self.setState({ puntos : response.data});
     		}
     	});
-
-    	request.get('api/periodoSenadores')
+    request.get('api/puntosMunicipio/ensenada')
     	.then(function(response){
     		if(response.status === 200){
-    			self.setState({periodo_senadores : response.data});
-    			
-    			self.props.promedio_senadores(response.data[0].created_at);
+    			self.setState({ puntosMunicipio : response.data});
     		}
     	});
 
@@ -235,35 +251,20 @@ class App extends Component {
     }
 
 	_handleChangeSelect(e) {
+		let _self = this;
 
-		if(e.target.name == 'filtrado'){
-			this.props.reset_data();
-			this.setState({send_seccion : ''});
+		if(e.target.name=='Municipio'){
+			request.get('api/puntosMunicipio/'+e.target.value)
+    		.then(function(response){
+    		if(response.status === 200){
+    			_self.setState({ puntosMunicipio : response.data});
+    		}
+    	});
 		}
-
-
-		this.setState({send_seccion : '', search_seccion : ''})
 
 		this.setState({ [e.target.name]: e.target.value });
 
-		if(e.target.name == 'periodo'){
-			this.props.reset_data();
-		}
-
-		if(e.target.name == 'periodo' && this.state.filtrado === 2) {
-			this.props.promedio_senadores(this.state.periodo_senadores[e.target.value].created_at);
-			
-		}
-		else if(e.target.name == 'periodo' && this.state.filtrado === 1){
-			this._actualizarDiputados(this.state.distrito,this.state.periodo_diputados[e.target.value].created_at);
-		}
-
-		if(e.target.name == 'distrito' && this.state.filtrado === 1) {
-			if(e.target.value > 0)
-				this._actualizarDiputados(e.target.value,this.state.periodo_diputados[this.state.periodo].created_at);
-			else 
-				this.props.borrar_promedio_diputado();
-		}
+		
 
 				
 	}
@@ -353,7 +354,7 @@ class App extends Component {
 						</Typography>
 						<IconButton color="inherit" onClick={() => {
 
-							window.location.href = 'http://encuestasbc.org/verify/#/app';
+							window.location.href = '/#/captura';
 
 						}} className={classes.button} aria-label="Delete">
 							<DashboardIcon />
@@ -404,22 +405,37 @@ class App extends Component {
 				        </AppBar>
 				        {tabActive === 0 && 
 				        	<Grid container spacing={8}>	
-					        	<Grid item xs={12} sm={12}> 
-					        		<Paper>
-							        	<div align="center" style={{paddingTop: '10px' , paddingBottom : '10px'}} >
-							        		<label>Seccion: </label>
-							        		<Input
-							        			type='text'
-							        			value={this.state.seccion}
-							        			name='seccion'
-							        			onChange={this._handleInputChange}
-							        		/>
-
-							        	</div>
+					        	<Grid item xs={12} sm={5}> 
+					        		<Paper style={{height : '100%'}}>
+							        	<div style={{paddingLeft : '20px', paddingTop : '30px', display : 'inline-block'}}>
+									    	<FormControl className={classes.formControl} style={{paddingRight : '20px'}}>
+												<InputLabel htmlFor="name-readonly">Municipio</InputLabel>
+									          <Select
+									            value={this.state.Municipio}
+									            onChange={this._handleChangeSelect}
+									            displayEmpty
+									            name="Municipio"
+									            className={classes.selectEmpty}
+									          	>
+									            <MenuItem value={'Ensenada'}>Ensenada</MenuItem>
+									            <MenuItem value={'Rosarito'}>Rosarito</MenuItem>
+									            <MenuItem value={'Tecate'}>Tecate</MenuItem>
+									            <MenuItem value={'Mexicali'}>Mexicali</MenuItem>
+									          </Select>
+									        </FormControl>
+									    </div>
+									    <div style={{paddingTop : '30px'}}>
+									    	<GraficaPreocupaciones data={[this.state.puntosMunicipio]}/>
+									    </div>
 						        	</Paper>
-						        	<Paper>
+						        </Grid>
+						        <Grid item xs={12} sm={7}>
+						        	<Paper >
 							        	<div align="center">
-							        		<GraficaGeneral />
+							        		<div style={{paddingTop : '20px'}}>
+							        			<label>Resultados Distrito 7</label>
+							        		</div>
+							        		<GraficaGeneral datos={this.state.puntos}/>
 							        	</div>
 						        	</Paper>
 						        </Grid>

@@ -169,6 +169,7 @@ class Captura extends Component {
 					prd_pan:'',
 					pan_mc:'',
 					prd_mc:'',
+					prd_pan_mc : '',
 					pri:'',
 					morena:'',
 					pt :'',
@@ -176,10 +177,11 @@ class Captura extends Component {
 					morena_pt:'', 
 					morena_pes :'',
 					pt_pes :'',
+					morena_pt_pes  : '',
 					pv :'',
 					na :'',
 					nulos:''
-								}
+				}
 
 		};
 
@@ -199,12 +201,13 @@ class Captura extends Component {
    
 
 	submit() {
-let {casilla} = this.state;
-console.log("casilla----->",casilla);
-let save=true;
+		let {casilla} = this.state;
+		console.log("casilla----->",casilla);
+		let save=true;
+		let _self = this;
 
-
-let check = [       'nombre_rc',
+		let check = [       
+					'nombre_rc',
 					'seccion',
 					'telefono',
 					'tipo_casilla',
@@ -214,6 +217,7 @@ let check = [       'nombre_rc',
 					'prd_pan',
 					'pan_mc',
 					'prd_mc',
+					'prd_pan_mc',
 					'pri',
 					'morena',
 					'pt',
@@ -221,51 +225,41 @@ let check = [       'nombre_rc',
 					'morena_pt',
 					'morena_pes',
 					'pt_pes',
+					'morena_pt_pes',
 					'pv',
 					'na',
 					'nulos',
 					];
-					let campo='';
-           for(let i in check) {
+					
+			let campo='';
 
-			let key = check[i];
+           	for(let i in check) {
 
-			let value = casilla[key];
+				let key = check[i];
 
-			if(value == '' || value == null){
-				save = false;
-				console.log(key);
+				let value = casilla[key];
 
-			}
-                 
-                
-
-			
+				if(value == '' || value == null) {
+					save = false;
+					console.log(key);
+				}
 				
 			}
 
-		
-
 		if(save){
+
 			request.post('api/casillas', casilla).then(function(response) {
 
 			if(response.status === 200) {
-
-               /*exito*/
-				
+               /*exito*/	
                  swal("Registro", "Exitoso ");
-				
-
+                 _self.resetData();
 			}
-			else{
-			swal("Oops..", "Error de registro ");
-			}
-
-		})
-		.catch(function(error) {
-			swal("Oops..", "Error de Servidor ");
-			// dispatch({ type: 'SAVE_FAILURE' });
-		});
+			})
+			.catch(function(error) {
+				swal("Oops..", "Error de Servidor ");
+				// dispatch({ type: 'SAVE_FAILURE' });
+			});
 
 
 		}else{
@@ -273,6 +267,35 @@ let check = [       'nombre_rc',
 		}
 
        
+	}
+
+	resetData(){
+		this.setState({
+			casilla:{
+				nombre_rc:"",
+				seccion:'',
+				telefono:'',
+				tipo_casilla:'',
+				prd :'',
+				pan :'',
+				mc :'',
+				prd_pan:'',
+				pan_mc:'',
+				prd_mc:'',
+				prd_pan_mc : '',
+				pri:'',
+				morena:'',
+				pt :'',
+				pes :'',
+				morena_pt:'', 
+				morena_pes :'',
+				pt_pes :'',
+				morena_pt_pes : '',
+				pv :'',
+				na :'',
+				nulos:''
+			}
+		});
 	}
 
 	_actualizarDiputados(distrito , periodo){
@@ -405,11 +428,11 @@ let check = [       'nombre_rc',
 							        	</div>
 						        	</Paper>
 						        	<Paper>
-							        	<div  style={{paddingTop: '10px' , paddingBottom : '10px',marginLeft:'100px'}} >
+							        	<div  style={{paddingTop: '10px' ,marginLeft:'100px'}} >
 							        		<strong><label className={classes.titulo}>Datos Representante: </label></strong>
 							        	</div>
 							        		<br/>
-							        	<div  style={{paddingTop: '10px' , paddingBottom : '10px' ,marginLeft:'250px'}} >
+							        	<div  style={{paddingTop: '10px' ,marginLeft:'250px'}} >
 							        		
 							        	
 							        		<label>Nombre Completo: </label>
@@ -436,11 +459,11 @@ let check = [       'nombre_rc',
 							        	</div>
 						        	</Paper>
 						        	<Paper>
-							        	<div  style={{paddingTop: '10px' , paddingBottom : '10px',marginLeft:'100px'}} >
+							        	<div  style={{paddingTop: '10px' ,marginLeft:'100px'}} >
 							        		<strong><label className={classes.titulo}>Datos de la Casilla: </label></strong>
 							        	</div>
 							        		<br/>
-							        	<div  style={{paddingTop: '10px' , paddingBottom : '10px' ,marginLeft:'250px'}} >
+							        	<div  style={{paddingTop: '10px'  ,marginLeft:'250px'}} >
 							        		
 							        	
 							        		<label>Seccion: </label>
@@ -452,7 +475,7 @@ let check = [       'nombre_rc',
 							        			value={casilla.seccion}
 							        		
 							        		/>
-							        		<label  style={{ marginLeft:'50px' }}>Tipo Casilla: </label>
+							        		<label  style={{ marginLeft:'30px' }}>Tipo Casilla: </label>
 							        		<Input
 							        			type='text'							        			
 							        		    style={{width: '300px' }}
@@ -473,191 +496,204 @@ let check = [       'nombre_rc',
 							        		<br/>
 										<Grid container  spacing={8}>	
 											<Grid item xs={12} sm={12}>
-											<Paper>
-											<label  style={{ marginLeft:'50px' }}>PAN: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='pan'
-							        			onChange={this.handleChangeInput}
-							        			value={this.state.casilla.pan}
-							        		
-							        		/> 
-							        	
-							        		<label  style={{ marginLeft:'50px' }}>PAN-PRD: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='prd_pan'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.prd_pan}
-							        		
-							        		/>
-							        		
-							        		<label  style={{ marginLeft:'50px' }}>PAN-Movimiento C.: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='pan_mc'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.pan_mc}
-							        		
-							        		/>
-							        	
-							        		<label  style={{ marginLeft:'50px' }}>PRD: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='prd'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.prd}
-							        		
-							        		/>
-							        	
-							        		<label  style={{ marginLeft:'50px' }}>PRD-Movimiento C: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='prd_mc'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.prd_mc}
-							        		
-							        		/>
-							        	
-							        		<label  style={{ marginLeft:'50px' }}>Movimiento Ciudadano: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='mc'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.mc}
-							        		
-							        		/>
-							        			<br/><br/>
-		                                    </Paper>
+												<Paper align='center'>
+												<label  style={{ marginLeft:'30px' }}>PAN: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='pan'
+								        			onChange={this.handleChangeInput}
+								        			value={this.state.casilla.pan}
+								        		
+								        		/> 
+								        	
+								        		<label  style={{ marginLeft:'30px' }}>PAN-PRD: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='prd_pan'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.prd_pan}
+								        		
+								        		/>
+								        		
+								        		<label  style={{ marginLeft:'30px' }}>PAN-Movimiento C.: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='pan_mc'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.pan_mc}
+								        		
+								        		/>
+								        	
+								        		<label  style={{ marginLeft:'30px' }}>PRD: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='prd'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.prd}
+								        		
+								        		/>
+								        	
+								        		<label  style={{ marginLeft:'30px' }}>PRD-Movimiento C: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='prd_mc'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.prd_mc}
+								        		
+								        		/>
+								        	
+								        		<label  style={{ marginLeft:'30px' }}>Movimiento Ciudadano: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='mc'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.mc}
+								        		
+								        		/>
+
+								        		<label  style={{ marginLeft:'30px' }}>Alianza pan prd mc: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='prd_pan_mc'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.prd_pan_mc}
+								        		
+								        		/>
+
+								        			<br/><br/>
+			                                    </Paper>
 								        	
 											</Grid>
-
-
-
-
-
-
 											<Grid item xs={12} sm={12}> 
-                                             <Paper>
-											<label  style={{ marginLeft:'50px' }}>PRI: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='pri'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.pri}
-							        		
-							        		/>
+                                             <Paper align='center'>
+												<label  style={{ marginLeft:'30px' }}>PRI: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='pri'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.pri}
+								        		
+								        		/>
 
 
-							        		<label  style={{ marginLeft:'50px' }}>Nueva Alianza: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='na'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.na}
-							        		
-							        		/>
+								        		<label  style={{ marginLeft:'30px' }}>Nueva Alianza: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='na'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.na}
+								        		
+								        		/>
 
-							        		<label  style={{ marginLeft:'50px' }}>Partido Verde: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='pv'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.pv}
-							        		
-							        		/>
-											<br/><br/>
+								        		<label  style={{ marginLeft:'30px' }}>Partido Verde: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='pv'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.pv}
+								        		
+								        		/>
+												<br/><br/>
 											</Paper>
 								        	
 											</Grid>
 
-
-
-
-
-
 											<Grid item xs={12} sm={12}> 
-                                             <Paper>
-											<label  style={{ marginLeft:'50px' }}>Morena: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='morena'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.morena}
-							        		
-							        		/>
-							        		
-							        		<label  style={{ marginLeft:'50px' }}>Morena-PT: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='morena_pt'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.morena_pt}
-							        		
-							        		/>
-							        	
-							        		<label  style={{ marginLeft:'50px' }}>Morena-P. Encuentro S.: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='morena_pes'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.morena_pes}
-							        		
-							        		/>
+                                             <Paper align='center'>
+												<label  style={{ marginLeft:'50px' }}>Morena: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='morena'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.morena}
+								        		
+								        		/>
+								        		
+								        		<label  style={{ marginLeft:'50px' }}>Morena-PT: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='morena_pt'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.morena_pt}
+								        		
+								        		/>
+								        	
+								        		<label  style={{ marginLeft:'50px' }}>Morena-P. Encuentro S.: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='morena_pes'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.morena_pes}
+								        		
+								        		/>
 
-							        		<label  style={{ marginLeft:'50px' }}>Partido del Trabajo: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='pt'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.pt}
-							        		
-							        		/>
+								        		<label  style={{ marginLeft:'50px' }}>Partido del Trabajo: </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='pt'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.pt}
+								        		
+								        		/>
 
-							        		<label  style={{ marginLeft:'50px' }}>PT -P. Encuentro S. : </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='pt_pes'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.pt_pes}
-							        		
-							        		/>
-							        		<br/><br/>
-							        		<label  style={{ marginLeft:'50px' }}>P. Encuentro Social : </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='pes'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.pes}
-							        		
-							        		/>
-							        		<label  style={{ marginLeft:'50px' }}>Votos  nulos : </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '45px' }}
-							        			name='nulos'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.nulos}
-							        		
-							        		/>
+								        		<label  style={{ marginLeft:'50px' }}>PT -P. Encuentro S. : </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='pt_pes'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.pt_pes}
+								        		
+								        		/>
+								        		<br/><br/>
+								        		<label  style={{ marginLeft:'50px' }}>P. Encuentro Social : </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='pes'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.pes}
+								        		
+								        		/>
+
+								        		<label  style={{ marginLeft:'50px' }}>Alianza Morena PT PES : </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='morena_pt_pes'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.morena_pt_pes}
+								        		
+								        		/>
+
+								        		<label  style={{ marginLeft:'50px' }}>Votos  nulos : </label>
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '45px' }}
+								        			name='nulos'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.nulos}
+								        		
+								        		/>
+
+								        		
 
 
-							        	<br/><br/>
+								        	<br/><br/>
                                           </Paper>
 											</Grid>
 											

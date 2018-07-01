@@ -26,7 +26,7 @@ class Root extends Component {
 							<Switch>
 								<Route exact path="/" component={Login} />
 								<Route path="/app" component={App} />
-								<Route path="/" component={Capturar} />
+								<Route path="/captura" component={Capturar} />
 							</Switch>
 						</HashRouter>
 					</Router>

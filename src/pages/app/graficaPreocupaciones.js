@@ -12,6 +12,9 @@ import {
 const data = [
 	{seguridad:10,servicios_publicos:10,empleo:20,infrastructura_urbana:10,agua:10,gasolina:20,basura:10,varios:1 , label : 'Preocupaciones'},
 ];
+const datas = [
+	{pan : 33.3 , pri : 17.8 , morena : 35.6  , otros : 10 , label : 'Partidos'},
+];
 
 
 export default class GraficaPreocupaciones extends Component{
@@ -33,18 +36,16 @@ export default class GraficaPreocupaciones extends Component{
 	                <ResponsiveContainer>
 	                    <BarChart width={730} height={250} data={this.props.data}>
 	                      <CartesianGrid strokeDasharray="3 3" />
-	                      <XAxis dataKey="labelP" />
+	                      <XAxis dataKey="label" />
 	                      <YAxis />                                  
 					 	  <Tooltip/>
 	                      <Legend />                            
-	                      <Bar dataKey="seguridad" fill='red' />
-	                      <Bar dataKey='servicios_publicos' fill='purple' />
-	                      <Bar dataKey='empleo' fill='black' />
-	                      <Bar dataKey='infrastructura_urbana' fill='green' />
-	                      <Bar dataKey='agua' fill='blue' />
-	                      <Bar dataKey='gasolina' fill='orange' />
-	                      <Bar dataKey='basura' fill='brown' />
-	                      <Bar dataKey='varios' fill='gray' />
+		                    <Bar dataKey="Por mexico al frente" fill='blue' />
+							<Bar dataKey='PRI' fill='red' />
+		                    <Bar dataKey="Juntos haremos historia" fill='brown' />
+		                    <Bar dataKey='Partido Verde' fill='green' />
+		                    <Bar dataKey='Nueva Alianza' fill='purple' />
+		                    <Bar dataKey='Nulos' fill='black' />
 	                     </BarChart>
 	                </ResponsiveContainer>
 	            </div>

@@ -32,19 +32,31 @@ export default class GraficaGeneral extends Component{
 	
 
 	render(){
+
+		let {datos} = this.props;
+		console.log(datos)
 		return(
 		    <div style={{width: '100%', height: '100vh' , paddingTop : '40px', paddingLeft: '10px'}}>
         	<div >
     		<strong></strong>
-		        <LineChart  data={data} width={650}  height={400}
+		        <LineChart  data={datos} width={800}  height={400}
 	           	 	margin={{top: 5, right: 30, left: 20, bottom: 5}}>
 			      	<XAxis dataKey="name"/>
 			      	<YAxis/>
 			      	<CartesianGrid strokeDasharray="3 3"/>
 			      	<Tooltip/>
 			      	<Legend />
-			      	<Line type="monotone" dataKey="pri" stroke="#8884d8" activeDot={{r: 8}}/>
-			      	<Line type="monotone" dataKey="pan" stroke="#82ca9d" />
+			      	
+			      	<Line type="monotone" dataKey="Por mexico al frente" 		stroke="#3333d6" activeDot={{r: 8}}/>
+
+			      	<Line type="monotone" dataKey="PRI" 		stroke="#db0d21" />
+
+			      	<Line type="monotone" dataKey="Juntos haremos historia" stroke="#7c7273" />
+
+
+			      	<Line type="monotone" dataKey="Partido Verde" 			stroke="#21a812" />
+			      	<Line type="monotone" dataKey="Nueva Alianza" 			stroke="#299e90" />
+			      	<Line type="monotone" dataKey="Nulos" 		stroke="#000000" />
 			    </LineChart>
 				</div>
 			</div>   
