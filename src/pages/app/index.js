@@ -2,6 +2,8 @@
 
 // https://material.io/tools/icons/?style=baseline
 
+
+
 import React, {Component} from "react";
 
 import { Redirect } from "react-router-dom";
@@ -31,6 +33,7 @@ import GoogleIcon from '@material-ui/icons/Equalizer';
 import FacebookIcon from '@material-ui/icons/Share';
 import Token from '@material-ui/icons/CardMembership';
 import Cicle from '@material-ui/icons/Brightness1'
+import Captura from '@material-ui/icons/Input'
 
 
 
@@ -75,6 +78,10 @@ const styles = theme => ({
 	},
 	button: {
 		margin: theme.spacing.unit,
+	},
+	button_texto: {
+		margin: theme.spacing.unit,
+		marginRight:'25px'
 	},
 	
 });
@@ -356,15 +363,11 @@ class App extends Component {
 
 							window.location.href = '/#/captura';
 
-						}} className={classes.button} aria-label="Delete">
-							<DashboardIcon />
+						}} className={classes.button_texto} aria-label="Delete">
+							<Captura /> Captura
 						</IconButton>
-						<IconButton color="inherit" onClick={this.toggle} className={classes.button} aria-label="Delete">
-							<Token  />						
-						</IconButton>	
-						<IconButton color="inherit" onClick={this.toggle_seccion} className={classes.button} aria-label="Delete">
-							<SettingsIcon  />
-						</IconButton>
+						
+						
 						<IconButton
 							color="inherit"
 							className={classes.button}

@@ -12,13 +12,15 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 
 import swal from 'sweetalert2';
+import Select, {Async} from 'react-select';
+import 'react-select/dist/react-select.css';
 
 import {
 	Grid,
 	Paper,
 	AppBar, Toolbar, Typography,
 	IconButton, Icon, Button,
-	FormControl, InputLabel, Select, MenuItem,
+	FormControl, InputLabel, MenuItem,
 	FormHelperText, Input,
 	Tabs, Tab,
 	Menu, List , ListItem ,Avatar,ListItemText, TextField
@@ -86,7 +88,11 @@ const styles = theme => ({
 	subtitulo : {
 	color: '#666666',
 	
-	}
+	},
+	button_texto: {
+		margin: theme.spacing.unit,
+		marginRight:'25px'
+	},
 	
 });
 
@@ -150,6 +156,10 @@ const D3 = [
 	{has: '#ensenada114',lat: 31.832876, lng: -116.597712},	
 ];
 
+
+
+
+
 class Captura extends Component {
 
 	constructor(props) {
@@ -158,9 +168,10 @@ class Captura extends Component {
 		this.state = {
 			anchorEl: null,
 				tabActive : 0,
+				secciones:[],
 				casilla:{
 					nombre_rc:"",
-					seccion:'',
+					seccion:'13',
 					telefono:'',
 					tipo_casilla:'',
 					prd :'',
@@ -186,19 +197,43 @@ class Captura extends Component {
 		};
 
 		this._handleChangeTab = this._handleChangeTab.bind(this);
-	this.submit 				= this.submit.bind(this);
-	this.handleChangeInput 		= this.handleChangeInput.bind(this);
+    	this.submit 				= this.submit.bind(this);
+	    this.handleChangeInput 		= this.handleChangeInput.bind(this);
 		this.myRef = React.createRef();
+		this.handleSelectChange 	= this.handleSelectChange.bind(this);
 
 	}
 
 	componentDidMount() {
-		
+		let self =this;
+		request.get('api/secciones')
+        .then(function(response)
+        {
+            self.setState({
+                secciones : response.data
+            });
+         
+           
+        });
 
 
     }
 
-   
+   handleSelectChange(select, name) {
+
+		const value = select === null ? null : select.value;
+
+		this.setState({
+			casilla: {
+				...this.state.casilla,
+				[name]: value
+			}
+		});
+		
+
+		
+
+	}
 
 	submit() {
 		let {casilla} = this.state;
@@ -273,7 +308,7 @@ class Captura extends Component {
 		this.setState({
 			casilla:{
 				nombre_rc:"",
-				seccion:'',
+				seccion:'13',
 				telefono:'',
 				tipo_casilla:'',
 				prd :'',
@@ -351,7 +386,7 @@ class Captura extends Component {
 	render() {
 		
 		const { classes } = this.props;
-		let {tabActive,casilla } = this.state;
+		let {tabActive,casilla,secciones } = this.state;
 	
 		const {  anchorEl } = this.state;
 		const open = Boolean(anchorEl);
@@ -370,12 +405,12 @@ class Captura extends Component {
 						<Typography variant="title" color='inherit' className={classes.flex}>
 							Nimblin
 						</Typography>
-						<IconButton color="inherit" onClick={() => {
+					<IconButton color="inherit" onClick={() => {
 
-							window.location.href = 'http://encuestasbc.org/verify/#/app';
+							window.location.href = '/#/app';
 
-						}} className={classes.button} aria-label="Delete">
-							<DashboardIcon />
+						}} className={classes.button_texto} aria-label="Delete">
+							<DashboardIcon /> Principal
 						</IconButton>
 						
 						<IconButton
@@ -464,22 +499,26 @@ class Captura extends Component {
 							        	</div>
 							        		<br/>
 							        	<div  style={{paddingTop: '10px'  ,marginLeft:'250px'}} >
+							        	<label  style={{marginBottom: '20px'}} >Seccion: </label>
 							        		
-							        	
-							        		<label>Seccion: </label>
-							        		<Input
-							        			type='text'							        			
-							        		    style={{width: '85px' }}
-							        			name='seccion'
-							        			onChange={this.handleChangeInput}
-							        			value={casilla.seccion}
+							        	<div  style={{width:'100px', display:'inline-block'}} >
 							        		
-							        		/>
+							        		<Select
+															placeholder=""
+															  clearable={false} 
+															type="text"
+															name="seccion"
+															options={secciones}
+															value={casilla.seccion || ""}
+															onChange={ (select) => { this.handleSelectChange(select, 'seccion') } }
+															
+														/>
+														</div>
 							        		<label  style={{ marginLeft:'30px' }}>Tipo Casilla: </label>
 							        		<Input
 							        			type='text'							        			
 							        		    style={{width: '300px' }}
-							        			name='tipo_casilla'
+							        		  							        			name='tipo_casilla'
 							        			onChange={this.handleChangeInput}
 							        			value={casilla.tipo_casilla}
 							        		
@@ -504,6 +543,7 @@ class Captura extends Component {
 								        			name='pan'
 								        			onChange={this.handleChangeInput}
 								        			value={this.state.casilla.pan}
+								        				 type="number"
 								        		
 								        		/> 
 								        	
@@ -514,6 +554,7 @@ class Captura extends Component {
 								        			name='prd_pan'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.prd_pan}
+								        			 type="number"
 								        		
 								        		/>
 								        		
@@ -524,6 +565,7 @@ class Captura extends Component {
 								        			name='pan_mc'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.pan_mc}
+								        			 type="number"
 								        		
 								        		/>
 								        	
@@ -534,6 +576,7 @@ class Captura extends Component {
 								        			name='prd'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.prd}
+								        			 type="number"
 								        		
 								        		/>
 								        	
@@ -544,6 +587,7 @@ class Captura extends Component {
 								        			name='prd_mc'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.prd_mc}
+								        			 type="number"
 								        		
 								        		/>
 								        	
@@ -554,6 +598,7 @@ class Captura extends Component {
 								        			name='mc'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.mc}
+								        			 type="number"
 								        		
 								        		/>
 
@@ -564,6 +609,7 @@ class Captura extends Component {
 								        			name='prd_pan_mc'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.prd_pan_mc}
+								        			 type="number"
 								        		
 								        		/>
 
@@ -580,6 +626,7 @@ class Captura extends Component {
 								        			name='pri'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.pri}
+								        			 type="number"
 								        		
 								        		/>
 
@@ -591,6 +638,7 @@ class Captura extends Component {
 								        			name='na'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.na}
+								        			 type="number"
 								        		
 								        		/>
 
@@ -601,6 +649,7 @@ class Captura extends Component {
 								        			name='pv'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.pv}
+								        			 type="number"
 								        		
 								        		/>
 												<br/><br/>
@@ -617,6 +666,7 @@ class Captura extends Component {
 								        			name='morena'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.morena}
+								        			 type="number"
 								        		
 								        		/>
 								        		
@@ -627,6 +677,7 @@ class Captura extends Component {
 								        			name='morena_pt'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.morena_pt}
+								        			 type="number"
 								        		
 								        		/>
 								        	
@@ -637,6 +688,7 @@ class Captura extends Component {
 								        			name='morena_pes'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.morena_pes}
+								        			 type="number"
 								        		
 								        		/>
 
@@ -647,6 +699,7 @@ class Captura extends Component {
 								        			name='pt'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.pt}
+								        			 type="number"
 								        		
 								        		/>
 
@@ -657,6 +710,7 @@ class Captura extends Component {
 								        			name='pt_pes'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.pt_pes}
+								        			 type="number"
 								        		
 								        		/>
 								        		<br/><br/>
@@ -667,6 +721,7 @@ class Captura extends Component {
 								        			name='pes'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.pes}
+								        			 type="number"
 								        		
 								        		/>
 
@@ -677,6 +732,7 @@ class Captura extends Component {
 								        			name='morena_pt_pes'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.morena_pt_pes}
+								        			 type="number"
 								        		
 								        		/>
 
@@ -687,6 +743,7 @@ class Captura extends Component {
 								        			name='nulos'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.nulos}
+								        			 type="number"
 								        		
 								        		/>
 

@@ -13,7 +13,19 @@ export const signin = (params) => {
             || params.username === 'adsnimblin003@outlook.com' && 
             params.password === '0699711233' 
             || params.username === 'admin@email.com' && 
-            params.password === 'abc123'  ) {
+            params.password === 'abc123' 
+             || params.username === 'captura01@email.com' && 
+            params.password === 'distrito7-2018' 
+             || params.username === 'captura02@email.com' && 
+            params.password === 'distrito7-2018' 
+             || params.username === 'captura03@email.com' && 
+            params.password === 'distrito7-2018' 
+             || params.username === 'captura04@email.com' && 
+            params.password === 'distrito7-2018' 
+             || params.username === 'captura05@email.com' && 
+            params.password === 'distrito7-2018' 
+             || params.username === 'captura06@email.com' && 
+            params.password === 'distrito7-2018'  ) {
 
             dispatch({type: 'AUTH_SIGNIN_SUCCESS'});
             return;
