@@ -47,6 +47,27 @@ import Haha from './images/haha.png';
 import Love from './images/love.png';
 import Nimblin from './images/nimblin.jpeg';
 
+
+import Pan from './logos partidos/partidos-01.png';
+import PRI from './logos partidos/partidos-02.png';
+import PV from './logos partidos/partidos-03.png';
+import NA from './logos partidos/partidos-04.png';
+import PRD from './logos partidos/partidos-05.png';
+import PT from './logos partidos/partidos-06.png';
+import MC from './logos partidos/partidos-07.png';
+import Encuentro from './logos partidos/partidos-08.png';
+import Morena from './logos partidos/partidos-09.png';
+import Morena_pt_pes from './logos partidos/partidos-10.png';
+import Morena_pes from './logos partidos/partidos-11.png';
+import Morena_pt from './logos partidos/partidos-12.png';
+import Prd_pan_mc from './logos partidos/partidos-13.png';
+import Pan_mc from './logos partidos/partidos-14.png';
+import Prd_pan from './logos partidos/partidos-15.png';
+import Nulos from './logos partidos/partidos-16.png';
+import Pt_pes from './logos partidos/partidos-17.png';
+import Prd_mc from './logos partidos/partidos-18.png';
+
+
 import { withStyles } from '@material-ui/core/styles';
 
 import './index.css';
@@ -535,66 +556,36 @@ class Captura extends Component {
 							        		<br/>
 										<Grid container  spacing={8}>	
 											<Grid item xs={12} sm={12}>
-												<Paper align='center'>
-												<label  style={{ marginLeft:'30px' }}>PAN: </label>
+												<Paper align='lef'>
+												<div style={{ marginLeft:'80px',display:'inline-block',width:'70px' }} > 	
+												<img src={Pan}  width={90} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '80px' }}
 								        			name='pan'
 								        			onChange={this.handleChangeInput}
 								        			value={this.state.casilla.pan}
 								        				 type="number"
 								        		
 								        		/> 
-								        	
-								        		<label  style={{ marginLeft:'30px' }}>PAN-PRD: </label>
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={PRD} width={90} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
-								        			name='prd_pan'
-								        			onChange={this.handleChangeInput}
-								        			value={casilla.prd_pan}
-								        			 type="number"
-								        		
-								        		/>
-								        		
-								        		<label  style={{ marginLeft:'30px' }}>PAN-Movimiento C.: </label>
-								        		<Input
-								        			type='text'							        			
-								        		    style={{width: '45px' }}
-								        			name='pan_mc'
-								        			onChange={this.handleChangeInput}
-								        			value={casilla.pan_mc}
-								        			 type="number"
-								        		
-								        		/>
-								        	
-								        		<label  style={{ marginLeft:'30px' }}>PRD: </label>
-								        		<Input
-								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '80px' }}
 								        			name='prd'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.prd}
 								        			 type="number"
 								        		
 								        		/>
-								        	
-								        		<label  style={{ marginLeft:'30px' }}>PRD-Movimiento C: </label>
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img  src={MC} width={90} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
-								        			name='prd_mc'
-								        			onChange={this.handleChangeInput}
-								        			value={casilla.prd_mc}
-								        			 type="number"
-								        		
-								        		/>
-								        	
-								        		<label  style={{ marginLeft:'30px' }}>Movimiento Ciudadano: </label>
-								        		<Input
-								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '80px' }}
 								        			name='mc'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.mc}
@@ -602,78 +593,158 @@ class Captura extends Component {
 								        		
 								        		/>
 
-								        		<label  style={{ marginLeft:'30px' }}>Alianza pan prd mc: </label>
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={PRI} width={90} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
-								        			name='prd_pan_mc'
-								        			onChange={this.handleChangeInput}
-								        			value={casilla.prd_pan_mc}
-								        			 type="number"
-								        		
-								        		/>
-
-								        			<br/><br/>
-			                                    </Paper>
-								        	
-											</Grid>
-											<Grid item xs={12} sm={12}> 
-                                             <Paper align='center'>
-												<label  style={{ marginLeft:'30px' }}>PRI: </label>
-								        		<Input
-								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '80px' }}
 								        			name='pri'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.pri}
 								        			 type="number"
 								        		
 								        		/>
-
-
-								        		<label  style={{ marginLeft:'30px' }}>Nueva Alianza: </label>
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={NA}  width={90} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '80px' }}
 								        			name='na'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.na}
 								        			 type="number"
 								        		
 								        		/>
+								        		</div>
+								        		
 
-								        		<label  style={{ marginLeft:'30px' }}>Partido Verde: </label>
+								        		
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={PV} width={90} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '80px' }}
 								        			name='pv'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.pv}
 								        			 type="number"
 								        		
 								        		/>
-												<br/><br/>
-											</Paper>
-								        	
-											</Grid>
+								        		
 
-											<Grid item xs={12} sm={12}> 
-                                             <Paper align='center'>
-												<label  style={{ marginLeft:'50px' }}>Morena: </label>
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={Morena} width={100} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '85px' }}
 								        			name='morena'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.morena}
 								        			 type="number"
 								        		
 								        		/>
-								        		
-								        		<label  style={{ marginLeft:'50px' }}>Morena-PT: </label>
+
+								        		</div>
+								        		<div style={{ marginLeft:'80px',display:'inline-block',width:'70px' }} > 	
+												<img src={PT} width={90} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '80px' }}
+								        			name='pt'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.pt}
+								        			 type="number"
+								        		
+								        		/>
+								        		
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={Encuentro} width={90} height={90}  alt="" />
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '80px' }}
+								        			name='pes'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.pes}
+								        			 type="number"
+								        		
+								        		/>
+								        		</div>
+
+								        		<br/><br/>
+
+
+
+
+
+
+								        	
+								        		<div style={{ marginLeft:'80px',display:'inline-block',width:'70px' }} > 	
+												<img src={Prd_pan}  width={90} height={90}  alt="" />
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '80px' }}
+								        			name='prd_pan'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.prd_pan}
+								        			 type="number"
+								        		
+								        		/>
+								        		
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={Pan_mc} width={90} height={90}  alt="" />
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '80px' }}
+								        			name='pan_mc'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.pan_mc}
+								        			 type="number"
+								        		
+								        		/>
+								        	
+								        		
+								        	
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={Prd_mc} width={90} height={90}  alt="" />
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '80px' }}
+								        			name='prd_mc'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.prd_mc}
+								        			 type="number"
+								        		
+								        		/>
+								        	
+								        		
+
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={Prd_pan_mc} width={90} height={90}  alt="" />
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '80px' }}
+								        			name='prd_pan_mc'
+								        			onChange={this.handleChangeInput}
+								        			value={casilla.prd_pan_mc}
+								        			 type="number"
+								        		
+								        		/>
+								        		</div>
+
+								        		
+
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={Morena_pt}  width={90} height={90}  alt="" />
+								        		<Input
+								        			type='text'							        			
+								        		    style={{width: '80px' }}
 								        			name='morena_pt'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.morena_pt}
@@ -681,10 +752,12 @@ class Captura extends Component {
 								        		
 								        		/>
 								        	
-								        		<label  style={{ marginLeft:'50px' }}>Morena-P. Encuentro S.: </label>
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={Morena_pes} width={90} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '80px' }}
 								        			name='morena_pes'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.morena_pes}
@@ -692,67 +765,59 @@ class Captura extends Component {
 								        		
 								        		/>
 
-								        		<label  style={{ marginLeft:'50px' }}>Partido del Trabajo: </label>
-								        		<Input
-								        			type='text'							        			
-								        		    style={{width: '45px' }}
-								        			name='pt'
-								        			onChange={this.handleChangeInput}
-								        			value={casilla.pt}
-								        			 type="number"
 								        		
-								        		/>
 
-								        		<label  style={{ marginLeft:'50px' }}>PT -P. Encuentro S. : </label>
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={Pt_pes} width={90} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '80px' }}
 								        			name='pt_pes'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.pt_pes}
 								        			 type="number"
 								        		
 								        		/>
-								        		<br/><br/>
-								        		<label  style={{ marginLeft:'50px' }}>P. Encuentro Social : </label>
-								        		<Input
-								        			type='text'							        			
-								        		    style={{width: '45px' }}
-								        			name='pes'
-								        			onChange={this.handleChangeInput}
-								        			value={casilla.pes}
-								        			 type="number"
-								        		
-								        		/>
 
-								        		<label  style={{ marginLeft:'50px' }}>Alianza Morena PT PES : </label>
+
+
+								        		</div>
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={Morena_pt_pes} width={90} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '80px' }}
 								        			name='morena_pt_pes'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.morena_pt_pes}
 								        			 type="number"
 								        		
 								        		/>
+								        		</div>
+								        		
 
-								        		<label  style={{ marginLeft:'50px' }}>Votos  nulos : </label>
+								        
+								        		<div style={{ marginLeft:'50px',display:'inline-block',width:'70px' }} > 	
+												<img src={Nulos} width={90} height={90}  alt="" />
 								        		<Input
 								        			type='text'							        			
-								        		    style={{width: '45px' }}
+								        		    style={{width: '80px' }}
 								        			name='nulos'
 								        			onChange={this.handleChangeInput}
 								        			value={casilla.nulos}
 								        			 type="number"
 								        		
 								        		/>
+								        		</div>
 
-								        		
-
-
-								        	<br/><br/>
-                                          </Paper>
+								        			<br/><br/>
+			                                    </Paper>
+								        	
 											</Grid>
+											
+
+											
 											
 										</Grid>
 										 <Button color="primary" type="submit" style={{ float:'right' }} onClick={this.submit}   >
