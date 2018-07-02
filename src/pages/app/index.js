@@ -34,6 +34,9 @@ import FacebookIcon from '@material-ui/icons/Share';
 import Token from '@material-ui/icons/CardMembership';
 import Cicle from '@material-ui/icons/Brightness1'
 import Captura from '@material-ui/icons/Input'
+import Recargar from '@material-ui/icons/Autorenew'
+
+
 
 
 
@@ -226,6 +229,7 @@ class App extends Component {
    //  			self.props.promedio_senadores(response.data[0].created_at);
    //  		}
    //  	});
+   let municipio= this.state.Municipio;
 
    	request.get('api/puntosDistrito/7')
     	.then(function(response){
@@ -233,7 +237,7 @@ class App extends Component {
     			self.setState({ puntos : response.data});
     		}
     	});
-    request.get('api/puntosMunicipio/ensenada')
+    request.get('api/puntosMunicipio/'+municipio)
     	.then(function(response){
     		if(response.status === 200){
     			self.setState({ puntosMunicipio : response.data});
@@ -436,7 +440,13 @@ class App extends Component {
 						        	<Paper >
 							        	<div align="center">
 							        		<div style={{paddingTop : '20px'}}>
-							        			<label>Resultados Distrito 7</label>
+							        			<label>Resultados Distrito 7</label> <IconButton color="inherit" onClick={() => {
+
+							this.componentDidMount();
+
+						}} className={classes.button_texto} aria-label="Delete">
+							<Recargar /> 
+						</IconButton>
 							        		</div>
 							        		<GraficaGeneral datos={this.state.puntos}/>
 							        	</div>
